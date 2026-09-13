@@ -1,20 +1,18 @@
 class Solution {
     public int[] findErrorNums(int[] nums) {
-        int n=nums.length;
+        int n = nums.length;
+        int freq [] = new int [n+1];
+        for(int num : nums) {
+            freq[num]++;
+        }
         int duplicate = -1;
         int missing = -1;
-        for(int i=1;i<=n;i++) {
-            int count =0;
-            for(int num:nums) {
-                if(num ==i) {
-                    count++;
-                }
+        for(int j=1;j<=n;j++) {
+            if(freq[j] == 2) {
+                duplicate = j;
             }
-            if(count == 2) {
-                duplicate = i;
-            }
-            if(count ==0) {
-                missing = i;
+            if(freq[j] == 0) {
+                missing = j;
             }
         }
         return new int [] {duplicate , missing};
